@@ -213,9 +213,9 @@
 
         </div>
 
-        <div id="legend" style="z-index:2; background:rgba(1,1,1,1); position: fixed; left:45%; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px; width:100px;">
+        <div v-if="use_context" id="legend" style="z-index:2; background:rgba(1,1,1,1); position: fixed; left:45%; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px; width:100px;">
 
-          <img v-if="use_context" v-bind:src="context" width="100%">
+          <img  v-bind:src="context" width="100%">
 
         </div>
 
@@ -280,7 +280,19 @@ Vue.component('modal', {
 var auth_id = {
   "medulina.com": "d0dee0089411bc5134ae",
   "localhost:8000": "f586bf4498f82125fc48",
+<<<<<<< HEAD
   "test.medulina.com": "7a33c7349ef2968b7480"
+=======
+  "medulinatest": "7a33c7349ef2968b7480"
+}
+
+function get_oauth_id(){
+  var oauth_id = auth_id[window.location.host];
+  if (window.location.href.indexOf("testmedulina") >= 0){
+    oauth_id = auth_id["medulinatest"]
+  }
+  return oauth_id
+>>>>>>> 707d5f7d151338247825e2f6e82d90e95dc6efd4
 }
 
 var app =  new Vue({
@@ -313,7 +325,7 @@ var app =  new Vue({
         id: null,
         footer: 'click the icon to log in with GitHub',
         title: 'Log in with GitHub',
-        url: 'https://github.com/login/oauth/authorize?client_id='+auth_id[window.location.host],
+        url: 'https://github.com/login/oauth/authorize?client_id='+get_oauth_id(),
         image: 'images/Octocat1.jpg',
         token: null
       },
